@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.TermMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.Term">
+		<id column="DEVICE_NO" property="device_no" jdbcType="VARCHAR" />
+		<result column="DEVICE_MANUF_NO" property="deviceManufNo" jdbcType="VARCHAR" />
+		<result column="DEVICE_MODEL_NO" property="deviceModelNo" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CORP_NO" property="corpNo" jdbcType="VARCHAR" />
+		<result column="LINK_MAN" property="linkMan" jdbcType="VARCHAR" />
+		<result column="TELPHONE" property="telphone" jdbcType="VARCHAR" />
+		<result column="IMSI" property="imsi" jdbcType="VARCHAR" />
+		<result column="CREATE_TM" property="createTm" jdbcType="VARCHAR" />
+		<result column="LAST_MODIFY_TM" property="lastModifyTm" jdbcType="VARCHAR" />
+		<result column="TERM_KEY" property="termKey" jdbcType="VARCHAR" />
+		<result column="LIFE_STATUS" property="lifeStatus" jdbcType="CHAR" />
+		<result column="OPEN_TM" property="openTm" jdbcType="VARCHAR" />
+		<result column="OFTEN_LONGITUDE" property="oftenLongitude"	jdbcType="VARCHAR" />
+		<result column="OFTEN_LATITUDE" property="oftenLatitude" 	jdbcType="VARCHAR" />
+		<result column="OFTEN_PROVINCE" property="oftenProvince"	jdbcType="VARCHAR" />
+		<result column="OFTEN_CITY" property="oftenCity" jdbcType="VARCHAR" />
+		<result column="OFTEN_COUNTY" property="oftenCounty" jdbcType="VARCHAR" />
+		<result column="PUBLIC_KEY" property="public_key" jdbcType="VARCHAR" />
+		<result column="ELE_FENCE_TYPE" property="ele_fence_type" jdbcType="VARCHAR" />
+		<result column="ELE_FENCE_DATA" property="ele_fence_data" jdbcType="VARCHAR" />
+		<result column="OPEN_FLAG" property="open_flag" jdbcType="VARCHAR" />
+		<result column="NEW_DEVICE_NO" property="new_device_no" jdbcType="VARCHAR" />
+
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		DEVICE_NO,DEVICE_MANUF_NO,DEVICE_MODEL_NO,STATUS,CORP_NO,LINK_MAN,TELPHONE,IMSI,CREATE_TM,LAST_MODIFY_TM,TERM_KEY,LIFE_STATUS,
+		OPEN_TM,OFTEN_LONGITUDE,OFTEN_LATITUDE,OFTEN_PROVINCE,OFTEN_CITY,OFTEN_COUNTY,PUBLIC_KEY,ELE_FENCE_TYPE,ELE_FENCE_DATA,OPEN_FLAG,
+		MAC,NEW_DEVICE_NO
+	</sql>
+	
+	<select id="selectTermInfo" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from t_term
+	</select>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		A.*,B.LATEST_ACCESS_TM,B.IP,B.BASE_STATION,B.LONGITUDE,B.LATITUDE,B.HARDWARE_STAT_BMP
+		from T_TERM A
+		left
+		join T_TERM_DYN B ON A.DEVICE_NO=B.DEVICE_NO WHERE A.DEVICE_NO =
+		#{id,jdbcType=VARCHAR}
+	</select>
+</mapper>

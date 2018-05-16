@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.TermBehaviorValueDayMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.TermBehaviorValueDay">
+		<id column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
+		<id column="ANALY_DAY" property="analyDay" jdbcType="VARCHAR" />
+		
+	    <result column="BUSINESS_TIME_VALUE" property="businessTimeValue" jdbcType="DOUBLE" />
+	    <result column="NETWORK_VALUE" property="networkValue" jdbcType="DOUBLE" />
+	    <result column="TRADE_VALUE" property="tradeValue" jdbcType="DOUBLE" />
+	    <result column="BEHAVIOR_VALUE" property="behaviorValue" jdbcType="DOUBLE" />
+	    
+	    <result column="TRADE_SUCCESS_VALUE" property="tradeSuccessValue" jdbcType="DOUBLE" />
+	    <result column="BOOT_TIME_VALUE" property="bootTimeValue" jdbcType="DOUBLE" />
+	    <result column="SHUT_TIME_VALUE" property="shutTimeValue" jdbcType="DOUBLE" />
+	    <result column="TRAFFIC_VALUE" property="trafficValue" jdbcType="DOUBLE" />
+	    
+	    <result column="CONFIG_DETAIL" property="configDetail" jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status" jdbcType="CHAR" />
+	    <result column="CREATE_TM" property="createTm" jdbcType="VARCHAR" />
+	    
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+    	DEVICE_NO,ANALY_DAY,BUSINESS_TIME_VALUE,NETWORK_VALUE,TRADE_VALUE,BEHAVIOR_VALUE,STATUS,CREATE_TM,
+    	TRADE_SUCCESS_VALUE,BOOT_TIME_VALUE,SHUT_TIME_VALUE,TRAFFIC_VALUE,CONFIG_DETAIL
+ 	</sql>
+ 	
+ 	<select id="selectByPrimaryKeys" resultMap="BaseResultMap" parameterType="fthink.entity.TermBehaviorValueDay">
+		select <include refid="Base_Column_List" /> from t_term_behavior_value_day
+		<where>
+					 DEVICE_NO = #{deviceNo}  and ANALY_DAY = #{analyDay}
+		</where>
+		order by CREATE_TM desc 
+	</select>
+ 	
+ 	<insert id="insert" parameterType="fthink.entity.TermBehaviorValueDay">
+		insert into t_term_behavior_value_day 
+		(DEVICE_NO,ANALY_DAY,BUSINESS_TIME_VALUE,NETWORK_VALUE,TRADE_VALUE,BEHAVIOR_VALUE,
+					TRADE_SUCCESS_VALUE,BOOT_TIME_VALUE,SHUT_TIME_VALUE,TRAFFIC_VALUE,STATUS,CREATE_TM,CONFIG_DETAIL)
+		values (#{deviceNo,jdbcType=VARCHAR}, #{analyDay,jdbcType=VARCHAR},
+				
+				#{businessTimeValue,jdbcType=DOUBLE},#{networkValue,jdbcType=DOUBLE},#{tradeValue,jdbcType=DOUBLE},#{behaviorValue,jdbcType=DOUBLE},
+				#{tradeSuccessValue,jdbcType=DOUBLE},#{bootTimeValue,jdbcType=DOUBLE},#{shutTimeValue,jdbcType=DOUBLE},#{trafficValue,jdbcType=DOUBLE},
+				
+				#{status,jdbcType=VARCHAR},#{createTm,jdbcType=VARCHAR},#{configDetail,jdbcType=VARCHAR})
+	</insert>
+ 	
+</mapper>

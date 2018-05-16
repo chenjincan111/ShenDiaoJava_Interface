@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.DataNetworkMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.DataNetwork">
+		<id column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
+		<id column="ANALY_DATE" property="analyDate" jdbcType="VARCHAR" />
+		<result column="NETWORK_CONDITIONS" property="networkConditions" jdbcType="VARCHAR" />
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+		DEVICE_NO,ANALY_DATE,NETWORK_CONDITIONS,LAST_MODIFY_TIME
+	</sql>
+	
+	<select id="selectOneByConditions" parameterType="fthink.entity.DataNetwork" resultMap="BaseResultMap">
+		select * from t_data_network
+		<where>
+			<if test="deviceNo!=null and deviceNo!=''">
+				and DEVICE_NO=#{deviceNo}
+			</if>
+			<if test="analyDate!=null and analyDate!=''">
+				and ANALY_DATE=#{analyDate}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="fthink.entity.DataNetwork">
+		insert into t_data_network (DEVICE_NO,ANALY_DATE,NETWORK_CONDITIONS,LAST_MODIFY_TIME)
+		values (#{deviceNo,jdbcType=VARCHAR}, #{analyDate,jdbcType=VARCHAR},
+		#{networkConditions,jdbcType=VARCHAR},#{lastModifyTime,jdbcType=VARCHAR})
+	</insert>
+	
+	 <select id="selectByPrimaryKeys" resultMap="BaseResultMap" parameterType="fthink.entity.DataNetwork">
+		select <include refid="Base_Column_List" /> from t_data_network
+		<where>
+			DEVICE_NO = #{deviceNo,jdbcType=VARCHAR} and ANALY_DATE = #{analyDate,jdbcType=VARCHAR}
+		</where>
+		order by ANALY_DATE desc 
+	</select>
+	
+	 <select id="selectByDeviceNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" /> from t_data_network
+		<where>
+			DEVICE_NO = #{id,jdbcType=VARCHAR} 
+		</where>
+		order by ANALY_DATE desc 
+	</select>
+
+	<update id="updateByPrimaryKey" parameterType="fthink.entity.DataNetwork">
+		update t_data_network t
+		set
+		t.NETWORK_CONDITIONS=#{networkConditions},
+		t.LAST_MODIFY_TIME=#{lastModifyTime}
+		<where>
+			DEVICE_NO = #{deviceNo,jdbcType=VARCHAR} and ANALY_DATE = #{analyDate,jdbcType=VARCHAR}
+		</where>
+	</update>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.DataDeviceResultMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.DataDeviceResult">
+		<id column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
+		<result column="BUSINESS_TIME" property="businessTime" jdbcType="VARCHAR" />
+		<result column="TIME_COUNT" property="timeCount" jdbcType="INTEGER" />
+		<result column="TRACE_COUNT" property="traceCount" jdbcType="INTEGER" />
+		<result column="SWITCH_TIMES" property="switchTimes" jdbcType="INTEGER" />
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="VARCHAR" />
+		
+		<result column="TRACE_SUCCESS_RATE" property="traceSuccessRate" jdbcType="DOUBLE" />
+		<result column="TRAFFIC" property="traffic" jdbcType="INTEGER" />
+		<result column="BOOT_TIME" property="bootTime" jdbcType="INTEGER" />
+		<result column="OFF_TIME" property="offTime" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		DEVICE_NO,BUSINESS_TIME,TIME_COUNT,TRACE_COUNT,SWITCH_TIMES,LAST_MODIFY_TIME,
+		TRACE_SUCCESS_RATE,TRAFFIC,BOOT_TIME,OFF_TIME
+	</sql>
+
+	<update id="updateByPrimaryKey" parameterType="fthink.entity.DataDeviceResult">
+		update t_data_device_result t
+		set
+		t.SWITCH_TIMES=#{switchTimes},
+		t.LAST_MODIFY_TIME=#{lastModifyTime}
+		<where>
+			t.DEVICE_NO = #{deviceNo}
+		</where>
+	</update>
+
+	<update id="updateBusinessTime" parameterType="fthink.entity.DataDeviceResult">
+		update t_data_device_result t
+		set
+		t.BUSINESS_TIME=#{businessTime},
+		t.TIME_COUNT=#{timeCount},
+		t.LAST_MODIFY_TIME=#{lastModifyTime}
+		<where>
+			t.DEVICE_NO = #{deviceNo}
+		</where>
+	</update>
+	
+	<update id="updateTradeCount" parameterType="fthink.entity.DataDeviceResult">
+		update t_data_device_result t
+		set
+		t.TRACE_COUNT=#{traceCount},
+		t.TRACE_SUCCESS_RATE=#{traceSuccessRate},
+		t.LAST_MODIFY_TIME=#{lastModifyTime}
+		<where>
+			t.DEVICE_NO = #{deviceNo}
+		</where>
+	</update>
+	
+	<update id="updateBootTime" parameterType="fthink.entity.DataDeviceResult">
+		update t_data_device_result t
+		set
+		t.BOOT_TIME=#{bootTime},
+		t.OFF_TIME=#{offTime},
+		t.LAST_MODIFY_TIME=#{lastModifyTime}
+		<where>
+			t.DEVICE_NO = #{deviceNo}
+		</where>
+	</update>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from t_data_device_result t
+		<where>
+			t.DEVICE_NO = #{deviceNo}
+		</where>
+	</select>
+	
+	<insert id="insert" parameterType="fthink.entity.DataDeviceResult">
+		insert into t_data_device_result (DEVICE_NO,SWITCH_TIMES) values(#{deviceNo},#{switchTimes})
+	</insert>
+	
+	<insert id="insertBusinessTime" parameterType="fthink.entity.DataDeviceResult">
+		insert into t_data_device_result (DEVICE_NO,BUSINESS_TIME,TIME_COUNT) values(#{deviceNo},#{businessTime},#{timeCount})
+	</insert>
+	
+	<insert id="insertTradeCount" parameterType="fthink.entity.DataDeviceResult">
+		insert into t_data_device_result (DEVICE_NO,TRACE_COUNT,TRACE_SUCCESS_RATE) values(#{deviceNo},#{traceCount},#{traceSuccessRate})
+	</insert>
+	
+	<insert id="insertBootTime" parameterType="fthink.entity.DataDeviceResult">
+		insert into t_data_device_result (DEVICE_NO,BOOT_TIME,OFF_TIME) values(#{deviceNo},#{bootTime},#{offTime})
+	</insert>
+	
+	<insert id="insertTraffic" parameterType="fthink.entity.DataDeviceResult">
+		insert into t_data_device_result(DEVICE_NO,TRAFFIC) values(#{deviceNo},#{traffic})
+	</insert>
+	<update id="updateTraffic" parameterType="fthink.entity.DataDeviceResult">
+		update t_data_device_result t
+		set
+		t.TRAFFIC=#{traffic},
+		t.LAST_MODIFY_TIME=#{lastModifyTime}
+		<where>
+			t.DEVICE_NO = #{deviceNo}
+		</where>
+	</update>
+</mapper>

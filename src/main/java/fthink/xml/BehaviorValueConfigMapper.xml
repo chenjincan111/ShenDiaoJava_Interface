@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.BehaviorValueConfigMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.BehaviorValueConfig">
+		<id column="CORP_NO" property="corpNo" jdbcType="VARCHAR" />
+	    <result column="BUSINESS_TIME_WEIGHT" property="businessTimeWeight" jdbcType="VARCHAR" />
+	    <result column="NETWORK_WEIGHT" property="networkWeight" jdbcType="VARCHAR" />
+	    <result column="TRADE_WEIGHT" property="tradeWeight" jdbcType="VARCHAR" />
+	    <result column="CREATE_TM" property="createTm" jdbcType="VARCHAR" />
+	    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+	    <result column="LAST_MODIFY_TM" property="lastModifyTm" jdbcType="VARCHAR" />
+	    
+	    <result column="CORP_NAME" property="corpName" jdbcType="VARCHAR" />
+	    
+	    <result column="TRADE_SUCCESS_WEIGHT" property="tradeSuccessWeight" jdbcType="VARCHAR" />
+	    <result column="TRAFFIC_WEIGHT" property="trafficWeight" jdbcType="VARCHAR" />
+	    <result column="BOOT_TIME_WEIGTH" property="bootTimeWeigth" jdbcType="VARCHAR" />
+	    <result column="SHUTDOWN_TIME_WEIGHT" property="shutdownTimeWeight" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+    	CORP_NO,BUSINESS_TIME_WEIGHT,NETWORK_WEIGHT,TRADE_WEIGHT,CREATE_TM,CREATOR,LAST_MODIFY_TM,
+    	TRADE_SUCCESS_WEIGHT,TRAFFIC_WEIGHT,BOOT_TIME_WEIGTH,SHUTDOWN_TIME_WEIGHT
+ 	</sql>
+ 	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" /> from t_behavior_value_config
+		<where>
+					 CORP_NO = #{id}  
+		</where>
+		order by CREATE_TM desc 
+	</select>
+</mapper>

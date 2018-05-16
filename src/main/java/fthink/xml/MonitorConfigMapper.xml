@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.MonitorConfigMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.MonitorConfig">
+		<id column="CORP_NO" property="corpNo" jdbcType="VARCHAR" />
+	    
+	    <result column="TRAFFIC_CONFIG" property="trafficConfig" jdbcType="VARCHAR" />
+	    <result column="SHIFT_CONFIG" property="shiftConfig" jdbcType="VARCHAR" />
+	    <result column="STATE_CONFIG" property="stateConfig" jdbcType="VARCHAR" />
+	    <result column="AUTH_CONFIG" property="authConfig" jdbcType="VARCHAR" />
+	    <result column="BEHAVIOR_CONFIG" property="behaviorConfig" jdbcType="VARCHAR" />
+	    
+	    <result column="CREATE_TM" property="createTm" jdbcType="VARCHAR" />
+	    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+	    <result column="LAST_MODIFY_TM" property="lastModifyTm" jdbcType="VARCHAR" />
+	    
+	    <result column="CORP_NAME" property="corpName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+    	CORP_NO,TRAFFIC_CONFIG,SHIFT_CONFIG,STATE_CONFIG,AUTH_CONFIG,BEHAVIOR_CONFIG,CREATE_TM,CREATOR,LAST_MODIFY_TM
+ 	</sql>
+ 	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" /> from t_monitor_config
+		<where>
+					 CORP_NO = #{id}  
+		</where>
+		order by CREATE_TM desc 
+	</select>
+	
+	
+</mapper>

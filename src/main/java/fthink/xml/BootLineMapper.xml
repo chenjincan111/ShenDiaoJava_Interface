@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fthink.dao.BootLineMapper">
+	<resultMap id="BaseResultMap" type="fthink.entity.BootLine">
+		<id column="UUID" property="uuid" jdbcType="VARCHAR" />
+		<result column="DEVICE_NO" property="device_no" jdbcType="VARCHAR" />
+		<result column="LAST_OFF_TM" property="lastOffTm" jdbcType="VARCHAR" />
+		<result column="LAST_ON_TM" property="lastOnTm" jdbcType="VARCHAR" />
+		<result column="CREATE_TM" property="createTm" jdbcType="VARCHAR" />
+		<result column="LAST_MODIFY_TM" property="lastModifyTm" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<sql id="Base_Column_List">
+		UUID,DEVICE_NO,LAST_OFF_TM,LAST_ON_TM,CREATE_TM,LAST_MODIFY_TM
+	</sql>
+	
+	<select id="listBootLine" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select <include refid="Base_Column_List"/> 
+		from t_boot_line
+		<where>
+			<if test="device_no !=null and device_no != ''">
+				and DEVICE_NO = #{device_no}
+			</if>
+			<if test="nowDate !=null and nowDate != ''">
+				and LAST_ON_TM like CONCAT(#{nowDate},'%')
+			</if>
+		</where>
+		order by LAST_ON_TM  asc
+	</select>
+	
+	<select id="listFirstBootTime" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select max(a.LAST_OFF_TM) as LAST_OFF_TM,min(a.LAST_ON_TM) as LAST_ON_TM,a.DEVICE_NO from t_boot_line a
+		where a.LAST_ON_TM &gt;= #{minDate} AND a.LAST_ON_TM &lt;= #{maxDate} and a.device_no = #{device_no}
+		GROUP BY SUBSTRING(a.LAST_ON_TM,1,8),SUBSTRING(a.LAST_OFF_TM,1,8),a.DEVICE_NO
+	</select>
+	
+	<select id="listDeviceNo" resultMap="BaseResultMap"  parameterType="java.util.Map">
+		select a.DEVICE_NO from t_boot_line a 
+		where a.LAST_ON_TM &gt;= #{minDate} AND a.LAST_ON_TM &lt;= #{maxDate}
+		group by a.DEVICE_NO
+	</select>
+	
+</mapper>
