@@ -10,61 +10,6 @@
 			http://www.springframework.org/schema/task 
 			http://www.springframework.org/schema/task/spring-task-4.2.xsd">
 
-	
-	<!-- 终端网络信息分析 -->
-	<bean id="networkAnalyseTask" class="fthink.task.NetworkAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="networkAnalyseTask" method="init" cron="0 6 18 * * ?"/>
-	</task:scheduled-tasks>
-	
-	<!-- 运营时间数据保存 -->
-	<bean id="businessTimeTask" class="fthink.task.BusinessTimeTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="businessTimeTask" method="init" cron="30 6 18 * * ?"/>
-	</task:scheduled-tasks>
-
-	<!-- 开关机次数保存 -->
-	<bean id="bootLineTask" class="fthink.task.BootLineTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="bootLineTask" method="init" cron="0 7 18 * * ?"/>
-	</task:scheduled-tasks>
-	
-	<!-- 行为数据结果分析 -->
-	<bean id="behaviorDataAnalyseTask" class="fthink.task.BehaviorDataAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="behaviorDataAnalyseTask" method="init" cron="30 7 18 * * ?"/>
-	</task:scheduled-tasks>
-	
-	<!-- 开关机次数分析 -->
-	<bean id="bootLineAnalyseTask" class="fthink.task.BootLineAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="bootLineAnalyseTask" method="init" cron="0 8 18 * * ?"/>
-	</task:scheduled-tasks>
-	
-	<!-- 运营时间统计分析 -->
-	<bean id="businessTimeAnalyseTask" class="fthink.task.BusinessTimeAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="businessTimeAnalyseTask" method="init" cron="30 8 18 * * ?"/>
-	</task:scheduled-tasks>
-
-	<!-- 交易量分析 -->
-	<bean id="tradeDataAnalyseTask" class="fthink.task.TradeDataAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="tradeDataAnalyseTask" method="init" cron="0 9 18 * * ?"/>
-	</task:scheduled-tasks>
-	
-	<!-- 开机时间分析 -->
-	<bean id="bootTimeAnalyseTask" class="fthink.task.BootTimeAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="bootTimeAnalyseTask" method="init" cron="30 9 18 * * ?"/>
-	</task:scheduled-tasks>
-	
-	<!-- 流量分析  -->
-	<bean id="trafficAnalyseTask" class="fthink.task.TrafficAnalyseTask"/>
-	<task:scheduled-tasks>   
-		<task:scheduled ref="trafficAnalyseTask" method="init" cron="0 10 18 * * ?"/>
-	</task:scheduled-tasks>
-	
 	<!-- 时间 -->
 	<!-- <bean id="timeTask" class="fthink.task.TimeTask"/>
 	<task:scheduled-tasks>   

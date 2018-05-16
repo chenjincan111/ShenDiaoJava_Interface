@@ -90,6 +90,7 @@
 			<tx:method name="reset*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
 			<tx:method name="change*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
 			<tx:method name="force*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+			<tx:method name="push*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
 			<tx:method name="find*" isolation="DEFAULT" propagation="REQUIRED" read-only="true" />
 			<tx:method name="get*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
 			<tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>

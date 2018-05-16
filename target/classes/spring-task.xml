@@ -10,10 +10,10 @@
 			http://www.springframework.org/schema/task 
 			http://www.springframework.org/schema/task/spring-task-4.2.xsd">
 
-	<!-- 终端网络信息分析 -->
-	<bean id="networkAnalyseTask" class="fthink.task.NetworkAnalyseTask"/>
-	<!-- 定时任务配置 -->
+	<!-- 时间 -->
+	<!-- <bean id="timeTask" class="fthink.task.TimeTask"/>
 	<task:scheduled-tasks>   
-		<task:scheduled ref="networkAnalyseTask" method="init" cron="0 0/1 * * * ?"/>
-	</task:scheduled-tasks>
+		<task:scheduled ref="timeTask" method="run" cron="0/1 * * * * ?"/>
+	</task:scheduled-tasks> -->
+	
 </beans>
