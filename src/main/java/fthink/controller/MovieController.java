@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fthink.entity.Movie;
-import fthink.service.impl.IMovieService;
+import fthink.service.IMovieService;
 
 @Controller
 @RequestMapping("movie")
 public class MovieController {
 
-private Map<String,Object> jsonMap = new HashMap<String,Object>();
+	private Map<String,Object> jsonMap = new HashMap<String,Object>();
 
 	@Autowired
 	private IMovieService movieService;

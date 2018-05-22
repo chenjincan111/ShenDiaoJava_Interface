@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fthink.dao.MovieMapper;
 import fthink.entity.Movie;
+import fthink.service.IMovieService;
 import fthink.utils.BeanUtil;
 import fthink.utils.Page;
 

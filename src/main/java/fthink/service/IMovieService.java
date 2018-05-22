@@ -1,4 +1,4 @@
-package fthink.service.impl;
+package fthink.service;
 
 import java.util.List;
 
