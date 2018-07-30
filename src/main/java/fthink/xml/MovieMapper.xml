@@ -12,9 +12,10 @@
     <result column="genres" property="genres" jdbcType="VARCHAR" />
     <result column="vedio_url" property="vedioUrl" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, title, date, type, rating, img_url, author, genres, vedio_url,summary
+    id, title, date, type, rating, img_url, author, genres, vedio_url,summary,open_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -25,16 +26,15 @@
   
   <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
   	SELECT
-		<include refid="Base_Column_List" /> from movie
+		<include refid="Base_Column_List" /> from movie a
 	<where>
-		<!-- <if test="imsi!=null and imsi!=''">
-			<bind name="imsi" value="'%'+imsi+'%'"/>
-			A.IMSI like #{imsi}
+		 <if test="openId!=null and openId!=''">
+			a.open_id = #{openId}
 		</if>
-		<if test="iccid !=null and iccid!=''">
-			<bind name="iccid" value="'%'+iccid+'%'"/>
-			and A.ICCID like #{iccid}
-		</if> -->
+		<if test="title !=null and title!=''">
+			<bind name="title" value="'%'+title+'%'"/>
+			and A.title like #{title}
+		</if> 
 	</where>
   </select>
   
@@ -47,11 +47,11 @@
     insert into movie (id, title, date, 
       type, rating, img_url, 
       author, genres, vedio_url, 
-      summary)
+      summary,open_id)
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{rating,jdbcType=DOUBLE}, #{imgUrl,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{genres,jdbcType=VARCHAR}, #{vedioUrl,jdbcType=VARCHAR}, 
-      #{summary,jdbcType=VARCHAR})
+      #{summary,jdbcType=VARCHAR},#{openId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="fthink.entity.Movie" >
     insert into movie
@@ -86,6 +86,9 @@
       <if test="summary != null" >
         summary,
       </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -117,6 +120,9 @@
       </if>
       <if test="summary != null" >
         #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -150,6 +156,9 @@
       <if test="summary != null" >
         summary = #{summary,jdbcType=VARCHAR},
       </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -163,7 +172,8 @@
       author = #{author,jdbcType=VARCHAR},
       genres = #{genres,jdbcType=VARCHAR},
       vedio_url = #{vedioUrl,jdbcType=VARCHAR},
-      summary = #{summary,jdbcType=VARCHAR}
+      summary = #{summary,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

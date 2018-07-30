@@ -31,4 +31,10 @@ public class MoviesServiceImpl implements IMovieService {
 		return movieMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public void insert(Movie movie) {
+		movieMapper.insertSelective(movie);
+		
+	}
+
 }

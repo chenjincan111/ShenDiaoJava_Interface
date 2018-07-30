@@ -20,8 +20,18 @@ public class Movie {
     private String vedioUrl;
 
     private String summary;
+    
+    private String openId;
 
-    public String getId() {
+    public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+	public String getId() {
         return id;
     }
 
